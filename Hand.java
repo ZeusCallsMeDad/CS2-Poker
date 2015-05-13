@@ -39,8 +39,9 @@ public class Hand implements Comparable {
 
    public int ifStatementsGalore()
    {
-   hand.sort();
-   String x = hand(0).suit;
+     hand.sort();
+     String x = hand(0).suit;
+
      if(hand(0).value==10 &&
         hand(1).toString.equals("11"+firstSuit) &&
         hand(2).toString.equals("12"+firstSuit) &&
@@ -68,16 +69,43 @@ public class Hand implements Comparable {
      String[] otherSuits = { hand.get(1).suit, hand.get(2).suit, hand.get(3).suit, hand.get(4).suit};
      boolean flush = false;
 
-     if()//Flush
-        return 6;
-     if()//Straight
+     for(int i = 0; i < 5; i++)
+     {
+       if(firstSuit.equals(otherSuits[0]) && firstSuit.equals(otherSuits[i])){//Flush
+          return 6;
+       }
+     }
+
+     if(hand.get(0).value == hand.get(4).value-4){//Straight
         return 5;
-     if()//Three of a Kind
-        return 4;
-     if()//Two Pair
-        return 3;
-     if()// One Pair
-        return 2;
+     }
+
+     for(int i = 0; i < 3; i++)
+     {
+       if(hand.get(i).value == hand.get(i+1).value-1 && hand.get(i+1).value == hand.get(i+2).value -1 || hand.get(i).value == hand.get(i+1).value+1 && hand.get(i+1).value == hand.get(i+2).value + 1)//Three of a Kind
+          return 4;
+     }
+
+     int count = 0;
+     for(int i = 0; i < 4; i++)
+     {
+       if((hand.get(i).value == hand.get(i+1).value-1 || hand.get(i).value == hand.get(i+1).value+1))//Two Pair
+       {
+         i++;
+         count++;
+       }
+       if(count == 2)
+       {
+          return 3;
+       }
+     }
+
+     for(int i = 0; i < 4; i++)
+     {
+       if(hand.get(i).value == hand.get(i+1).value-1 || hand.get(i).value == hand.get(i+1).value+1)// One Pair
+          return 2;
+     }
+
      if()//High Card
         return 1;
 
